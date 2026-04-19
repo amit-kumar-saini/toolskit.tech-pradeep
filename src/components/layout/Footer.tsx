@@ -95,7 +95,23 @@ const Footer = () => {
     { name: "Terms of Service", href: "/terms" },
     { name: "Contact", href: "/contact" },
   ];
-...
+
+  return (
+    <footer className="bg-card border-t border-border mt-8 sm:mt-16" role="contentinfo">
+      <div className="container px-3 sm:px-4 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+          <div className="col-span-2 md:col-span-1 space-y-3">
+            <Link to="/" className="flex items-center gap-2">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <Wrench className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
+              </div>
+              <span className="text-lg sm:text-xl font-bold gradient-text">ToolsKit.tech</span>
+            </Link>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Your all-in-one toolkit for everyday tasks. Fast, free, and easy to use.
+            </p>
+          </div>
+
           <nav aria-label="Tool categories">
             <h3 className="font-semibold text-sm sm:text-base mb-3 sm:mb-4">Tool Categories</h3>
             <ul className="space-y-1.5 sm:space-y-2">
