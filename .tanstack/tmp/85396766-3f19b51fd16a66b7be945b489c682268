@@ -193,9 +193,9 @@ const ToolsBmiCalculatorRoute = ToolsBmiCalculatorRouteImport.update({
   getParentRoute: () => ToolsRoute,
 } as any)
 const ToolsAgeCalculatorRoute = ToolsAgeCalculatorRouteImport.update({
-  id: '/age-calculator',
-  path: '/age-calculator',
-  getParentRoute: () => ToolsRoute,
+  id: '/tools/age-calculator',
+  path: '/tools/age-calculator',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
@@ -420,6 +420,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  ToolsAgeCalculatorRoute: typeof ToolsAgeCalculatorRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
@@ -637,10 +638,10 @@ declare module '@tanstack/react-router' {
     }
     '/tools/age-calculator': {
       id: '/tools/age-calculator'
-      path: '/age-calculator'
+      path: '/tools/age-calculator'
       fullPath: '/tools/age-calculator'
       preLoaderRoute: typeof ToolsAgeCalculatorRouteImport
-      parentRoute: typeof ToolsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
       id: '/blog/$slug'
@@ -671,6 +672,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  ToolsAgeCalculatorRoute: ToolsAgeCalculatorRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
 export const routeTree = rootRouteImport

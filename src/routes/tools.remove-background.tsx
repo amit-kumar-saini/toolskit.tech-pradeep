@@ -1,21 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import RemoveBackground from "@/pages/tools/RemoveBackground";
-import { toolsSEO } from "@/lib/seoData";
-
-const seo = toolsSEO["remove-background"];
+import { buildToolHead } from "@/lib/toolHead";
 
 export const Route = createFileRoute("/tools/remove-background")({
-  head: () => ({
-    meta: [
-      { title: seo.title },
-      { name: "description", content: seo.description },
-      { name: "keywords", content: seo.keywords },
-      { property: "og:title", content: seo.title },
-      { property: "og:description", content: seo.description },
-      { property: "og:url", content: "https://toolskit.tech/tools/remove-background" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "https://toolskit.tech/tools/remove-background" }],
-  }),
+  head: () => buildToolHead("remove-background"),
   component: RemoveBackground,
 });
