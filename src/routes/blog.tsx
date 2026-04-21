@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Blog from "@/pages/Blog";
 import { blogPostsList } from "@/lib/blogMeta";
+import { buildPageHead } from "@/lib/toolHead";
 
 const blogStructuredData = {
   "@context": "https://schema.org",
@@ -28,51 +29,25 @@ const blogStructuredData = {
 };
 
 export const Route = createFileRoute("/blog")({
-  head: () => ({
-    meta: [
-      {
-        title:
-          "Blog – Tips & Tutorials for Free Online Tools | ToolsKit.tech",
-      },
-      {
-        name: "description",
-        content:
-          "Read the ToolsKit.tech blog for tips, tutorials, and guides on image compression, QR codes, PDF conversion, calculators, and more free online tools.",
-      },
-      {
-        name: "keywords",
-        content:
-          "online tools blog, image compression tips, qr code guide, pdf converter tutorial, free tools tips",
-      },
-      {
-        name: "robots",
-        content:
-          "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:title", content: "ToolsKit.tech Blog" },
-      {
-        property: "og:description",
-        content:
-          "Tips, tutorials and guides for getting the most out of free online tools.",
-      },
-      { property: "og:url", content: "https://toolskit.tech/blog" },
-      { property: "og:site_name", content: "ToolsKit.tech" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ToolsKit.tech Blog" },
-      {
-        name: "twitter:description",
-        content:
-          "Tips, tutorials and guides for getting the most out of free online tools.",
-      },
-    ],
-    links: [{ rel: "canonical", href: "https://toolskit.tech/blog" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify(blogStructuredData),
-      },
-    ],
-  }),
+  head: () => {
+    const base = buildPageHead({
+      title: "Blog – Tips & Tutorials for Free Online Tools | ToolsKit.tech",
+      description:
+        "Read the ToolsKit.tech blog for tips, tutorials, and guides on image compression, QR codes, PDF conversion, calculators, and more free online tools.",
+      keywords:
+        "online tools blog, image compression tips, qr code guide, pdf converter tutorial, free tools tips",
+      path: "/blog",
+    });
+    return {
+      ...base,
+      scripts: [
+        ...base.scripts,
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(blogStructuredData),
+        },
+      ],
+    };
+  },
   component: Blog,
 });
