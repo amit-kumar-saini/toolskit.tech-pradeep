@@ -1,8 +1,7 @@
 import Header from "@/components/layout/Header";
 import blogInvestmentImage from "@/assets/blog-investment-plans-2026.jpg";
 import Footer from "@/components/layout/Footer";
-import SEO from "@/components/SEO";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import { Calendar, Clock, ArrowRight, Tag } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -291,31 +290,8 @@ const blogPosts = [
 ];
 
 const Blog = () => {
-  const blogStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "ToolsKit.tech Blog",
-    "description": "Tips, tutorials, and guides for using free online tools effectively.",
-    "url": "https://toolskit.tech/blog",
-    "publisher": {
-      "@type": "Organization",
-      "name": "ToolsKit.tech",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://storage.googleapis.com/gpt-engineer-file-uploads/di7j8UAQsIVOsCbK58eG1NP3xrh2/uploads/1765097322356-mast logo.png"
-      }
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
-      <SEO
-        title="Blog - ToolsKit.tech | Tips & Tutorials for Free Online Tools"
-        description="Read our latest articles, tips, and tutorials on using free online tools. Learn about image compression, QR codes, PDF conversion, and more."
-        keywords="online tools blog, image compression tips, QR code guide, PDF converter tutorial, free tools tips"
-        canonicalUrl="/blog"
-        structuredData={blogStructuredData}
-      />
       <Header />
       
       <main className="container py-12">
