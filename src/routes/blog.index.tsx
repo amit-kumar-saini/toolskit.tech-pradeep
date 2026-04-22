@@ -3,6 +3,14 @@ import Blog from "@/pages/Blog";
 import { blogPostsList } from "@/lib/blogMeta";
 import { buildPageHead } from "@/lib/toolHead";
 
+const SITE = "https://toolskit.tech";
+const toAbsolute = (src: string) => {
+  const sized = src.replace("w=600&h=400", "w=1200&h=630");
+  return sized.startsWith("http")
+    ? sized
+    : `${SITE}${sized.startsWith("/") ? "" : "/"}${sized}`;
+};
+
 const blogStructuredData = {
   "@context": "https://schema.org",
   "@type": "Blog",
@@ -22,9 +30,9 @@ const blogStructuredData = {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    url: `https://toolskit.tech/blog/${post.slug}`,
+    url: `${SITE}/blog/${post.slug}`,
     datePublished: `${post.date}T00:00:00+05:30`,
-    image: post.image.replace("w=600&h=400", "w=1200&h=630"),
+    image: toAbsolute(post.image),
   })),
 };
 

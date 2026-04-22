@@ -19,8 +19,13 @@ export const Route = createFileRoute("/blog/$slug")({
       };
     }
     const url = `https://toolskit.tech/blog/${post.slug}`;
-    // Upgrade Unsplash thumbnails to OG-friendly 1200x630
-    const ogImage = post.image.replace("w=600&h=400", "w=1200&h=630");
+    // Upgrade Unsplash thumbnails to OG-friendly 1200x630, then ensure
+    // the URL is absolute (local asset imports become /_build/... paths
+    // that social crawlers cannot resolve without a host).
+    const sized = post.image.replace("w=600&h=400", "w=1200&h=630");
+    const ogImage = sized.startsWith("http")
+      ? sized
+      : `https://toolskit.tech${sized.startsWith("/") ? "" : "/"}${sized}`;
     const keywords = `${post.category.toLowerCase()}, online tools, free tools, ${post.title.toLowerCase()}`;
     const isoDate = `${post.date}T00:00:00+05:30`;
 
