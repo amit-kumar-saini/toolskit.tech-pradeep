@@ -7456,17 +7456,6 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO
-        title={`${post.title} | ToolsKit.tech Blog`}
-        description={post.excerpt}
-        keywords={`${post.category.toLowerCase()}, online tools, free tools, ${post.title.toLowerCase()}`}
-        canonicalUrl={`/blog/${post.slug}`}
-        ogType="article"
-        ogImage={post.image.replace('w=600&h=400', 'w=1200&h=630')}
-        structuredData={postStructuredData}
-        articlePublishedTime={post.date + "T00:00:00+05:30"}
-        articleModifiedTime={post.date + "T00:00:00+05:30"}
-      />
       <Header />
 
       <main className="container py-8 max-w-4xl">
@@ -7670,7 +7659,8 @@ const BlogPost = () => {
             {relatedPosts.map((relatedPost) => (
               <Link 
                 key={relatedPost.id} 
-                to={`/blog/${relatedPost.slug}`}
+                to="/blog/$slug"
+                params={{ slug: relatedPost.slug }}
                 className="group"
               >
                 <div className="aspect-video rounded-lg overflow-hidden mb-3">
