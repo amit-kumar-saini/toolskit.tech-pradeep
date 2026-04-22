@@ -7548,13 +7548,13 @@ const BlogPost = () => {
                     );
                   } else {
                     return (
-                      <Link 
+                      <a
                         key={`link-${index}-${keyIndex++}`}
-                        to={linkUrl}
+                        href={linkUrl}
                         className="text-primary hover:underline font-medium"
                       >
                         {content}
-                      </Link>
+                      </a>
                     );
                   }
                 };
@@ -7643,11 +7643,11 @@ const BlogPost = () => {
               <p className="text-muted-foreground mb-4">
                 Put what you learned into practice with our free {post.category.toLowerCase()} tool.
               </p>
-              <Link to={post.relatedTool}>
+              <a href={post.relatedTool}>
                 <Button variant="gradient">
                   Try Now <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-              </Link>
+              </a>
             </div>
           )}
         </article>
