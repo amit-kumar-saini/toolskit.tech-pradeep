@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [
-    tanstackStart({ target: "cloudflare-module" }),
+    tanstackStart(),
     tsconfigPaths(),
     react(),
     mode === "development" && componentTagger(),
