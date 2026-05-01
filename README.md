@@ -73,4 +73,4 @@ consumer) can deploy from `blogs` while Lovable continues writing to `main`.
 
 ## License
 
-© ToolsKit.tech — All rights reserved.
+© ToolsKit.tech — All rights reserved     .
