@@ -16,25 +16,8 @@ interface FAQProps {
 }
 
 const FAQ = ({ faqs, toolName }: FAQProps) => {
-  // Generate FAQ structured data
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  };
-
   return (
     <section className="mt-8">
-      <script type="application/ld+json">
-        {JSON.stringify(faqSchema)}
-      </script>
       <h2 className="text-xl font-bold mb-4">
         Frequently Asked Questions {toolName && `about ${toolName}`}
       </h2>
