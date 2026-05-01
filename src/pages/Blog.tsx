@@ -313,6 +313,10 @@ const Blog = () => {
               <img 
                 src={blogPosts[0].image} 
                 alt={blogPosts[0].title}
+                width={1200}
+                height={630}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -362,6 +366,10 @@ const Blog = () => {
                 <img 
                   src={post.image} 
                   alt={post.title}
+                  width={1200}
+                  height={630}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
