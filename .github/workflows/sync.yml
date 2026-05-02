@@ -1,8 +1,4 @@
-name: Sync main → blogs
-
-# Mirror everything pushed to `main` over to the `blogs` branch.
-# Lovable pushes to main; this keeps `blogs` in sync automatically
-# so Cloudflare Pages (or any consumer of the blogs branch) stays current.
+name: Sync to Hosting Repo
 
 on:
   push:
@@ -10,27 +6,51 @@ on:
       - main
   workflow_dispatch:
 
-concurrency:
-  group: sync-blogs
-  cancel-in-progress: false
-
 jobs:
   sync:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
-      - name: Checkout full history
+      - name: Checkout Source Repo
         uses: actions/checkout@v4
         with:
+          path: source
+          persist-credentials: false
           fetch-depth: 0
-          persist-credentials: true
 
-      - name: Configure git identity
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Checkout Hosting Repo (blogs branch)
+        env:
+          HOSTING_REPO_PAT: ${{ secrets.HOSTING_REPO_PAT }}
+        uses: actions/checkout@v4
+        with:
+          repository: amit-kumar-saini1/toolskit.tech
+          ref: blogs
+          path: target
+          token: ${{ secrets.HOSTING_REPO_PAT }}
+          persist-credentials: false
+          fetch-depth: 0
 
-      - name: Force-push main to blogs
+      - name: Sync code to Hosting Repo without rewriting history
+        env:
+          HOSTING_REPO_PAT: ${{ secrets.HOSTING_REPO_PAT }}
         run: |
-          git push origin "refs/heads/main:refs/heads/blogs" --force
+          if [ -z "$HOSTING_REPO_PAT" ]; then
+            echo "HOSTING_REPO_PAT is not set"
+            exit 1
+          fi
+
+          git config --global user.name "sync-bot"
+          git config --global user.email "sync@bot.com"
+
+          rsync -a --delete --exclude '.git' --exclude '.github/workflows/sync.yml' source/ target/
+
+          cd target
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to sync"
+            exit 0
+          fi
+
+          git commit -m "Sync from source repo (${GITHUB_SHA})"
+          git push https://x-access-token:${HOSTING_REPO_PAT}@github.com/amit-kumar-saini1/toolskit.tech.git HEAD:refs/heads/blogs
