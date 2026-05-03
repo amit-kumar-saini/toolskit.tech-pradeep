@@ -13,6 +13,8 @@ export interface ToolSEO {
   keywords: string;
   faqs: { question: string; answer: string }[];
   article?: ToolArticle;
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
 export const toolsSEO: Record<string, ToolSEO> = {
