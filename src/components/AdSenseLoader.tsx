@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "@tanstack/react-router";
 
 /**
  * Client-side AdSense script loader.
@@ -6,6 +7,8 @@ import { useEffect } from "react";
  * and only runs in the browser.
  */
 const AdSenseLoader = () => {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -39,6 +42,20 @@ const AdSenseLoader = () => {
       gtag("config", GA_ID, { send_page_view: true });
     }
   }, []);
+
+  // Fire GA page_view on every client-side route change
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const w = window as any;
+    if (typeof w.gtag === "function") {
+      w.gtag("event", "page_view", {
+        page_path: pathname,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    }
+  }, [pathname]);
+
   return null;
 };
 
