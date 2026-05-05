@@ -396,17 +396,20 @@ function QRGeneratorPage() {
 
             {/* Right sidebar — related tool links like screenshot */}
             <aside aria-label="Related tools" className="space-y-3">
-              <div className="bg-card border border-border rounded-xl p-3 grid grid-cols-2 gap-2 sticky top-4">
-                {RELATED_TOOLS.map((t) => (
-                  <Link
-                    key={t.to}
-                    to={t.to}
-                    className="block text-center text-sm md:text-base font-semibold text-primary hover:bg-primary/5 border border-border rounded-lg px-2 py-3 transition-colors"
-                  >
-                    {t.hot && <span className="text-destructive mr-1">●</span>}
-                    {t.label}
-                  </Link>
-                ))}
+              <div className="sticky top-4 space-y-3">
+                <div className="bg-card border border-border rounded-xl p-2 grid grid-cols-2 gap-1.5">
+                  {RELATED_TOOLS.map((t) => (
+                    <Link
+                      key={t.to}
+                      to={t.to}
+                      className="block text-center text-xs md:text-sm font-semibold text-primary hover:bg-primary/5 border border-border rounded-lg px-1.5 py-1.5 transition-colors leading-tight"
+                    >
+                      {t.hot && <span className="text-destructive mr-1">●</span>}
+                      {t.label}
+                    </Link>
+                  ))}
+                </div>
+                <SidebarAd />
               </div>
             </aside>
           </div>
