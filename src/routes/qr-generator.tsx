@@ -114,6 +114,46 @@ function AutorelaxedAd() {
   );
 }
 
+function SidebarAd() {
+  const ref = useRef<HTMLModElement>(null);
+  const loaded = useRef(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    if (!mounted || loaded.current) return;
+    const tryPush = (n = 0) => {
+      if (loaded.current) return;
+      const ag = (window as any).adsbygoogle;
+      if (ag && ref.current && ref.current.offsetWidth > 0) {
+        try {
+          ag.push({});
+          loaded.current = true;
+        } catch {
+          /* ignore */
+        }
+        return;
+      }
+      if (n < 12) window.setTimeout(() => tryPush(n + 1), 500);
+    };
+    tryPush();
+  }, [mounted]);
+  return (
+    <div className="bg-card border border-border rounded-xl p-2">
+      <p className="text-[10px] text-muted-foreground text-center mb-1">Advertisement</p>
+      {mounted && (
+        <ins
+          ref={ref}
+          className="adsbygoogle"
+          style={{ display: "block", minHeight: "500px" }}
+          data-ad-format="autorelaxed"
+          data-ad-client="ca-pub-1909827564331292"
+          data-ad-slot="6789447857"
+        />
+      )}
+    </div>
+  );
+}
+
 function QRGeneratorPage() {
   const [text, setText] = useState("https://toolskit.tech");
   const [fileName, setFileName] = useState("qrcode");
