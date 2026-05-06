@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RemoveBackgroundRouteImport } from './routes/remove-background'
 import { Route as QrGeneratorRouteImport } from './routes/qr-generator'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PdfToImageRouteImport } from './routes/pdf-to-image'
@@ -56,6 +57,11 @@ const TermsRoute = TermsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RemoveBackgroundRoute = RemoveBackgroundRouteImport.update({
+  id: '/remove-background',
+  path: '/remove-background',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QrGeneratorRoute = QrGeneratorRouteImport.update({
@@ -250,6 +256,7 @@ export interface FileRoutesByFullPath {
   '/pdf-to-image': typeof PdfToImageRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
+  '/remove-background': typeof RemoveBackgroundRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -290,6 +297,7 @@ export interface FileRoutesByTo {
   '/pdf-to-image': typeof PdfToImageRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
+  '/remove-background': typeof RemoveBackgroundRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -331,6 +339,7 @@ export interface FileRoutesById {
   '/pdf-to-image': typeof PdfToImageRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
+  '/remove-background': typeof RemoveBackgroundRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -373,6 +382,7 @@ export interface FileRouteTypes {
     | '/pdf-to-image'
     | '/privacy'
     | '/qr-generator'
+    | '/remove-background'
     | '/sitemap.xml'
     | '/terms'
     | '/blog/$slug'
@@ -413,6 +423,7 @@ export interface FileRouteTypes {
     | '/pdf-to-image'
     | '/privacy'
     | '/qr-generator'
+    | '/remove-background'
     | '/sitemap.xml'
     | '/terms'
     | '/blog/$slug'
@@ -453,6 +464,7 @@ export interface FileRouteTypes {
     | '/pdf-to-image'
     | '/privacy'
     | '/qr-generator'
+    | '/remove-background'
     | '/sitemap.xml'
     | '/terms'
     | '/blog/$slug'
@@ -494,6 +506,7 @@ export interface RootRouteChildren {
   PdfToImageRoute: typeof PdfToImageRoute
   PrivacyRoute: typeof PrivacyRoute
   QrGeneratorRoute: typeof QrGeneratorRoute
+  RemoveBackgroundRoute: typeof RemoveBackgroundRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -538,6 +551,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/remove-background': {
+      id: '/remove-background'
+      path: '/remove-background'
+      fullPath: '/remove-background'
+      preLoaderRoute: typeof RemoveBackgroundRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/qr-generator': {
@@ -806,6 +826,7 @@ const rootRouteChildren: RootRouteChildren = {
   PdfToImageRoute: PdfToImageRoute,
   PrivacyRoute: PrivacyRoute,
   QrGeneratorRoute: QrGeneratorRoute,
+  RemoveBackgroundRoute: RemoveBackgroundRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   BlogSlugRoute: BlogSlugRoute,
