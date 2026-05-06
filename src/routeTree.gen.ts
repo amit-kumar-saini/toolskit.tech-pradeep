@@ -13,7 +13,9 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as QrGeneratorRouteImport } from './routes/qr-generator'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PdfToImageRouteImport } from './routes/pdf-to-image'
 import { Route as KbResizePixelRouteImport } from './routes/kb-resize-pixel'
+import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -66,9 +68,19 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PdfToImageRoute = PdfToImageRouteImport.update({
+  id: '/pdf-to-image',
+  path: '/pdf-to-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KbResizePixelRoute = KbResizePixelRouteImport.update({
   id: '/kb-resize-pixel',
   path: '/kb-resize-pixel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImageToPdfRoute = ImageToPdfRouteImport.update({
+  id: '/image-to-pdf',
+  path: '/image-to-pdf',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImageCompressorRoute = ImageCompressorRouteImport.update({
@@ -233,7 +245,9 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/image-compressor': typeof ImageCompressorRoute
+  '/image-to-pdf': typeof ImageToPdfRoute
   '/kb-resize-pixel': typeof KbResizePixelRoute
+  '/pdf-to-image': typeof PdfToImageRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -271,7 +285,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/image-compressor': typeof ImageCompressorRoute
+  '/image-to-pdf': typeof ImageToPdfRoute
   '/kb-resize-pixel': typeof KbResizePixelRoute
+  '/pdf-to-image': typeof PdfToImageRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -310,7 +326,9 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/image-compressor': typeof ImageCompressorRoute
+  '/image-to-pdf': typeof ImageToPdfRoute
   '/kb-resize-pixel': typeof KbResizePixelRoute
+  '/pdf-to-image': typeof PdfToImageRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -350,7 +368,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/image-compressor'
+    | '/image-to-pdf'
     | '/kb-resize-pixel'
+    | '/pdf-to-image'
     | '/privacy'
     | '/qr-generator'
     | '/sitemap.xml'
@@ -388,7 +408,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/image-compressor'
+    | '/image-to-pdf'
     | '/kb-resize-pixel'
+    | '/pdf-to-image'
     | '/privacy'
     | '/qr-generator'
     | '/sitemap.xml'
@@ -426,7 +448,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/image-compressor'
+    | '/image-to-pdf'
     | '/kb-resize-pixel'
+    | '/pdf-to-image'
     | '/privacy'
     | '/qr-generator'
     | '/sitemap.xml'
@@ -465,7 +489,9 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ImageCompressorRoute: typeof ImageCompressorRoute
+  ImageToPdfRoute: typeof ImageToPdfRoute
   KbResizePixelRoute: typeof KbResizePixelRoute
+  PdfToImageRoute: typeof PdfToImageRoute
   PrivacyRoute: typeof PrivacyRoute
   QrGeneratorRoute: typeof QrGeneratorRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -528,11 +554,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pdf-to-image': {
+      id: '/pdf-to-image'
+      path: '/pdf-to-image'
+      fullPath: '/pdf-to-image'
+      preLoaderRoute: typeof PdfToImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kb-resize-pixel': {
       id: '/kb-resize-pixel'
       path: '/kb-resize-pixel'
       fullPath: '/kb-resize-pixel'
       preLoaderRoute: typeof KbResizePixelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/image-to-pdf': {
+      id: '/image-to-pdf'
+      path: '/image-to-pdf'
+      fullPath: '/image-to-pdf'
+      preLoaderRoute: typeof ImageToPdfRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/image-compressor': {
@@ -761,7 +801,9 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ImageCompressorRoute: ImageCompressorRoute,
+  ImageToPdfRoute: ImageToPdfRoute,
   KbResizePixelRoute: KbResizePixelRoute,
+  PdfToImageRoute: PdfToImageRoute,
   PrivacyRoute: PrivacyRoute,
   QrGeneratorRoute: QrGeneratorRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
