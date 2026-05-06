@@ -14,6 +14,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as QrGeneratorRouteImport } from './routes/qr-generator'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as KbResizePixelRouteImport } from './routes/kb-resize-pixel'
+import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as SplatRouteImport } from './routes/$'
@@ -68,6 +69,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const KbResizePixelRoute = KbResizePixelRouteImport.update({
   id: '/kb-resize-pixel',
   path: '/kb-resize-pixel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImageCompressorRoute = ImageCompressorRouteImport.update({
+  id: '/image-compressor',
+  path: '/image-compressor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -226,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/image-compressor': typeof ImageCompressorRoute
   '/kb-resize-pixel': typeof KbResizePixelRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
@@ -263,6 +270,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/image-compressor': typeof ImageCompressorRoute
   '/kb-resize-pixel': typeof KbResizePixelRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
@@ -301,6 +309,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/image-compressor': typeof ImageCompressorRoute
   '/kb-resize-pixel': typeof KbResizePixelRoute
   '/privacy': typeof PrivacyRoute
   '/qr-generator': typeof QrGeneratorRoute
@@ -340,6 +349,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/contact'
+    | '/image-compressor'
     | '/kb-resize-pixel'
     | '/privacy'
     | '/qr-generator'
@@ -377,6 +387,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/contact'
+    | '/image-compressor'
     | '/kb-resize-pixel'
     | '/privacy'
     | '/qr-generator'
@@ -414,6 +425,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/contact'
+    | '/image-compressor'
     | '/kb-resize-pixel'
     | '/privacy'
     | '/qr-generator'
@@ -452,6 +464,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  ImageCompressorRoute: typeof ImageCompressorRoute
   KbResizePixelRoute: typeof KbResizePixelRoute
   PrivacyRoute: typeof PrivacyRoute
   QrGeneratorRoute: typeof QrGeneratorRoute
@@ -520,6 +533,13 @@ declare module '@tanstack/react-router' {
       path: '/kb-resize-pixel'
       fullPath: '/kb-resize-pixel'
       preLoaderRoute: typeof KbResizePixelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/image-compressor': {
+      id: '/image-compressor'
+      path: '/image-compressor'
+      fullPath: '/image-compressor'
+      preLoaderRoute: typeof ImageCompressorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -740,6 +760,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  ImageCompressorRoute: ImageCompressorRoute,
   KbResizePixelRoute: KbResizePixelRoute,
   PrivacyRoute: PrivacyRoute,
   QrGeneratorRoute: QrGeneratorRoute,
